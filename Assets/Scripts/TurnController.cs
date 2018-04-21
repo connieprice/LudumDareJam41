@@ -48,7 +48,7 @@ public class TurnController : MonoBehaviour {
 
             if (!changePlayer)
             {
-                timeRemainingText.text = "Turn Time: " + ((int)time_remaining + 1).ToString();
+                timeRemainingText.text = ((int)time_remaining + 1).ToString();
                 time_remaining -= Time.deltaTime;
 
                 if (time_remaining <= 0f)
