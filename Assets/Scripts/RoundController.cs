@@ -14,6 +14,7 @@ public class RoundController : MonoBehaviour {
     public float positioning_period_time;
     public float positioning_period_time_remaining;
     public Text timeRemainingText;
+    public GameObject turnTimeText;
 
 
     private void Start()
@@ -24,6 +25,7 @@ public class RoundController : MonoBehaviour {
         player2_startpos = player2.transform.position;
         positioning_period_time = 10f;
         positioning_period_time_remaining = positioning_period_time;
+        resetGame();
     }
 
     private void Update()
@@ -31,17 +33,20 @@ public class RoundController : MonoBehaviour {
 
         if (nextRound)
         {
-            
-            timeRemainingText.text = ((int)positioning_period_time_remaining+1).ToString();
+            turnTimeText.SetActive(false);
+            timeRemainingText.text = "Positioning Time: " + ((int)positioning_period_time_remaining+1).ToString();
             positioning_period_time_remaining -= Time.deltaTime;
 
             if(positioning_period_time_remaining <= 0)
             {
                 timeRemainingText.gameObject.SetActive(false);
-
+                tc.currentPlayer = tc.player2;
                 tc.stopPlayer(tc.player2);
+                tc.changePlayer = true;
+                tc.hasShot = false;
                 nextRound = false;
                 tc.running = true;
+                turnTimeText.SetActive(true);
             }
 
         }
@@ -55,6 +60,8 @@ public class RoundController : MonoBehaviour {
         player2.GetComponent<HealthManager>().health = player2.GetComponent<HealthManager>().maxHealth;
         player1.transform.position = player1_startpos;
         player2.transform.position = player2_startpos;
+        player1.GetComponent<LineRenderer>().enabled = false;
+        player2.GetComponent<LineRenderer>().enabled = false;
         tc.currentPlayer = null;
         tc.startPlayer(tc.player1);
         tc.startPlayer(tc.player2);
