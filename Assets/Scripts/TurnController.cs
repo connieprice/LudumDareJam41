@@ -18,7 +18,7 @@ public class TurnController : MonoBehaviour {
     private float time_remaining;
     public FirstPersonController currentPlayer;
     public bool changePlayer = true;
-    public bool hasShot = false;
+    public bool hasShot = true;
     public bool running;
     public RoundController rc;
 
