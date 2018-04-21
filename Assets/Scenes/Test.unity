@@ -969,6 +969,7 @@ MonoBehaviour:
   nextRound: 1
   positioning_period_time: 0
   positioning_period_time_remaining: 0
+  timeRemainingText: {fileID: 1050257583}
 --- !u!1001 &1716265724
 Prefab:
   m_ObjectHideFlags: 0

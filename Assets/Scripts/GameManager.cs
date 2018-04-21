@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour {
         tc.running = false;
         rc.nextRound = true;
         AddScore();
+        tc.stopPlayer(tc.currentPlayer);
+        rc.resetGame();
         rc.positioning_period_time_remaining = rc.positioning_period_time;
         rc.nextRound = true;
 

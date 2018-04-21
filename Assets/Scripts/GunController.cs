@@ -38,14 +38,17 @@ public class GunController : MonoBehaviour {
             {
                 if (hit.transform.gameObject.tag == enemyTag)
                 {
-                    if (this.gameObject == tc.currentPlayer.gameObject)
+                    if (tc.currentPlayer != null)
                     {
-                        // Hit enemy
-                        Debug.Log("Kaboom");
-                        // hit.transform.gameObject.GetComponent<FirstPersonController>();
-                        GameObject enemy = tc.GetOtherPlayer().gameObject;
-                        enemy.GetComponent<HealthManager>().TakeDamage();
+                        if (this.gameObject == tc.currentPlayer.gameObject)
+                        {
+                            // Hit enemy
+                            Debug.Log("Kaboom");
+                            // hit.transform.gameObject.GetComponent<FirstPersonController>();
+                            GameObject enemy = tc.GetOtherPlayer().gameObject;
+                            enemy.GetComponent<HealthManager>().TakeDamage();
 
+                        }
                     }
                 }
             }

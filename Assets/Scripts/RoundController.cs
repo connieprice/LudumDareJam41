@@ -22,6 +22,7 @@ public class RoundController : MonoBehaviour {
         player2 = tc.player2.gameObject;
         player1_startpos = player1.transform.position;
         player2_startpos = player2.transform.position;
+        positioning_period_time = 10f;
         positioning_period_time_remaining = positioning_period_time;
     }
 
@@ -30,10 +31,18 @@ public class RoundController : MonoBehaviour {
 
         if (nextRound)
         {
-            tc.stopPlayer(tc.currentPlayer);
-            resetGame();
-            timeRemainingText.text = positioning_period_time_remaining.ToString();
+            
+            timeRemainingText.text = ((int)positioning_period_time_remaining+1).ToString();
             positioning_period_time_remaining -= Time.deltaTime;
+
+            if(positioning_period_time_remaining <= 0)
+            {
+                timeRemainingText.gameObject.SetActive(false);
+
+                tc.stopPlayer(tc.player2);
+                nextRound = false;
+                tc.running = true;
+            }
 
         }
 
@@ -46,6 +55,9 @@ public class RoundController : MonoBehaviour {
         player2.GetComponent<HealthManager>().health = player2.GetComponent<HealthManager>().maxHealth;
         player1.transform.position = player1_startpos;
         player2.transform.position = player2_startpos;
+        tc.currentPlayer = null;
+        tc.startPlayer(tc.player1);
+        tc.startPlayer(tc.player2);
 
         // Move to conditional
         // tc.running = true;
