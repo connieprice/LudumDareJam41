@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour {
 
         tc.stopPlayer(tc.currentPlayer);
         rc.timeRemainingText.gameObject.SetActive(true);
+        tc.player1.gameObject.GetComponent<HealthManager>().health = 3;
+        tc.player1.gameObject.GetComponent<HealthManager>().updateHealth();
+        tc.player2.gameObject.GetComponent<HealthManager>().health = 3;
+        tc.player2.gameObject.GetComponent<HealthManager>().updateHealth();
         rc.resetGame();
         rc.positioning_period_time_remaining = rc.positioning_period_time;
         rc.nextRound = true;
