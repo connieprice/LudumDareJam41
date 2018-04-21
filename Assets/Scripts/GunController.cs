@@ -37,7 +37,7 @@ public class GunController : MonoBehaviour {
             {
                 if (this.gameObject == tc.currentPlayer.gameObject)
                 {
-
+                    // Hit enemy
                     Debug.Log("Kaboom");
 
                 }
