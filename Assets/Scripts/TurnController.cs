@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.UI;
 
 public class TurnController : MonoBehaviour {
 
@@ -12,9 +13,11 @@ public class TurnController : MonoBehaviour {
     private float P_DefaultJumpSpeed;
     private float p_DefaultXSens;
     private float p_DefaultYSens;
-    private int noPlayers;
     private float turnLength;
-    private bool turn;
+    public Text timeRemainingText;
+    private float time_remaining;
+    private FirstPersonController currentPlayer;
+    private bool changePlayer = true;
 
     private void Start()
     {
@@ -22,40 +25,44 @@ public class TurnController : MonoBehaviour {
         P_DefaultJumpSpeed = player1.m_JumpSpeed;
         p_DefaultXSens = player1.m_MouseLook.XSensitivity;
         p_DefaultYSens = player1.m_MouseLook.YSensitivity;
-        player1.m_WalkSpeed = 0;
-        noPlayers = 2;
-        player2.m_WalkSpeed = 0;
-        turnLength = 5;
-        turn = false;
+        player1.m_WalkSpeed = 0f;
+        player2.m_WalkSpeed = 0f;
+        player1.m_RunSpeed = 0f;
+        player2.m_RunSpeed = 0f;
+        player1.m_JumpSpeed = 0f;
+        player2.m_JumpSpeed = 0f;
+        turnLength = 5f;
+        time_remaining = turnLength;
+        currentPlayer = player2;
     }
 
-    private void Main()
+    private void Update()
     {
-        Turn();
-    }
 
-    private void Turn(FirstPersonController currentPlayer)
-    {
-        float time_remaining = turnLength;
-
-        while (turn)
+        if (!changePlayer)
         {
-
-            startPlayer(currentPlayer);
-
+            timeRemainingText.text = ((int) time_remaining+1).ToString();
             time_remaining -= Time.deltaTime;
 
-            if (time_remaining <= 0) {
-
-                turn = false;
+            if(time_remaining <= 0f)
+            {
                 stopPlayer(currentPlayer);
-                // Broadcast turn has ended
+                changePlayer = true;
+            }
+        } else
+        {
+            if(currentPlayer == player1)
+            {
+                currentPlayer = player2;
+            } else
+            {
+                currentPlayer = player1;
+            }
 
-            };
-
+            startPlayer(currentPlayer);
+            changePlayer = false;
+            time_remaining = turnLength;
         }
-        // Do all the turn stuff
-
 
     }
 
