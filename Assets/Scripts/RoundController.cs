@@ -34,7 +34,7 @@ public class RoundController : MonoBehaviour {
         if (nextRound)
         {
             turnTimeText.SetActive(false);
-            timeRemainingText.text = ((int)positioning_period_time_remaining+1).ToString();
+            timeRemainingText.text = "Positioning Time: " + ((int)positioning_period_time_remaining+1).ToString();
             positioning_period_time_remaining -= Time.deltaTime;
 
             if(positioning_period_time_remaining <= 0)
