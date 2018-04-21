@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     private int p2_score;
     public Text p1_score_text;
     public Text p2_score_text;
+    public int roundLimit = 5;
 
     private void Start()
     {
@@ -28,6 +29,11 @@ public class GameManager : MonoBehaviour {
         tc.running = false;
         rc.nextRound = true;
         AddScore();
+        if(p1_score >= 5)
+        {
+            
+        }
+
         tc.stopPlayer(tc.currentPlayer);
         rc.timeRemainingText.gameObject.SetActive(true);
         rc.resetGame();
