@@ -29,7 +29,7 @@ public class GunController : MonoBehaviour {
 
     }
 
-    public void Shoot (){
+    private void Shoot (){
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, reach))
         {
