@@ -18,6 +18,9 @@ public class TurnController : MonoBehaviour {
     private float time_remaining;
     public FirstPersonController currentPlayer;
     private bool changePlayer = true;
+    public bool hasShot = false;
+    public bool running;
+    public RoundController rc;
 
     private void Start()
     {
@@ -38,30 +41,37 @@ public class TurnController : MonoBehaviour {
 
     private void Update()
     {
-
-        if (!changePlayer)
+        if (running)
         {
-            timeRemainingText.text = ((int) time_remaining+1).ToString();
-            time_remaining -= Time.deltaTime;
 
-            if(time_remaining <= 0f)
+            if (!changePlayer)
             {
-                stopPlayer(currentPlayer);
-                changePlayer = true;
+                timeRemainingText.text = ((int)time_remaining + 1).ToString();
+                time_remaining -= Time.deltaTime;
+
+                if (time_remaining <= 0f)
+                {
+                    stopPlayer(currentPlayer);
+                    changePlayer = true;
+                }
             }
-        } else
-        {
-            if(currentPlayer == player1)
+            else
             {
-                currentPlayer = player2;
-            } else
-            {
-                currentPlayer = player1;
+                if (currentPlayer == player1)
+                {
+                    currentPlayer = player2;
+                }
+                else
+                {
+                    currentPlayer = player1;
+                }
+
+                startPlayer(currentPlayer);
+                changePlayer = false;
+                hasShot = false;
+                time_remaining = turnLength;
             }
 
-            startPlayer(currentPlayer);
-            changePlayer = false;
-            time_remaining = turnLength;
         }
 
     }
@@ -76,13 +86,25 @@ public class TurnController : MonoBehaviour {
 
     }
 
-    public void stopPlayer (FirstPersonController player){
+    public void stopPlayer(FirstPersonController player) {
 
         player.m_WalkSpeed = 0f;
         player.m_RunSpeed = 0f;
         player.m_JumpSpeed = 0f;
         player.m_MouseLook.XSensitivity = 0f;
         player.m_MouseLook.XSensitivity = 0f;
+
+    }
+
+    public FirstPersonController GetOtherPlayer (){
+
+        if(currentPlayer == player1)
+        {
+            return player2;
+        } else
+        {
+            return player1;
+        }
 
     }
 }

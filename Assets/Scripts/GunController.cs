@@ -31,17 +31,26 @@ public class GunController : MonoBehaviour {
 
     private void Shoot (){
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, reach))
+        if (!tc.hasShot)
         {
-            if (hit.transform.gameObject.tag == enemyTag)
+            Debug.Log("Pew");
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, reach))
             {
-                if (this.gameObject == tc.currentPlayer.gameObject)
+                if (hit.transform.gameObject.tag == enemyTag)
                 {
-                    // Hit enemy
-                    Debug.Log("Kaboom");
+                    if (this.gameObject == tc.currentPlayer.gameObject)
+                    {
+                        // Hit enemy
+                        Debug.Log("Kaboom");
+                        // hit.transform.gameObject.GetComponent<FirstPersonController>();
+                        GameObject enemy = tc.GetOtherPlayer().gameObject;
+                        enemy.GetComponent<HealthManager>().TakeDamage();
 
+                    }
                 }
             }
+
+            tc.hasShot = true;
         }
 
     }
