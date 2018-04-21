@@ -9,6 +9,8 @@ public class GunController : MonoBehaviour {
     private bool rayHit;
     private string enemyTag;
     public TurnController tc;
+    public LineRenderer lr;
+    public Transform endRay;
 
     // Use this for initialization
     void Start() {
@@ -32,31 +34,41 @@ public class GunController : MonoBehaviour {
     }
 
     private void Shoot (){
-
-        Debug.Log(tc.hasShot);
-
-
+        
         if (!tc.hasShot)
         {
 
             tc.hasShot = true;
-            Debug.Log("111");
+
+            lr = tc.currentPlayer.gameObject.GetComponent<LineRenderer>();
+
+            lr.SetPosition(0, tc.currentPlayer.transform.position);
+
+            if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, reach))
+            {
+                lr.SetPosition(1, hit.transform.position);
+            } else
+            {
+                lr.SetPosition(1, endRay.position);
+            }
+
+            if (!lr.enabled)
+            {
+                lr.enabled = true;
+            }
+
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, reach))
             {
-                Debug.Log("222");
+
 
                 if (hit.transform.gameObject.tag == enemyTag)
                 {
-                    Debug.Log("333");
 
                     if (tc.currentPlayer != null)
                     {
-
-                        Debug.Log("444");
-
                         // Hit enemy
-                        Debug.Log("Kaboom");
+                        Debug.Log("Enemy Hit");
                         // hit.transform.gameObject.GetComponent<FirstPersonController>();
                         GameObject enemy = tc.GetOtherPlayer().gameObject;
                         enemy.GetComponent<HealthManager>().TakeDamage();
