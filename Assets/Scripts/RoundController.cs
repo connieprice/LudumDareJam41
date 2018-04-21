@@ -38,8 +38,10 @@ public class RoundController : MonoBehaviour {
             if(positioning_period_time_remaining <= 0)
             {
                 timeRemainingText.gameObject.SetActive(false);
-
+                tc.currentPlayer = tc.player2;
                 tc.stopPlayer(tc.player2);
+                tc.changePlayer = true;
+                tc.hasShot = false;
                 nextRound = false;
                 tc.running = true;
             }

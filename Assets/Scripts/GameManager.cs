@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour {
         rc.nextRound = true;
         AddScore();
         tc.stopPlayer(tc.currentPlayer);
+        rc.timeRemainingText.gameObject.SetActive(true);
         rc.resetGame();
         rc.positioning_period_time_remaining = rc.positioning_period_time;
         rc.nextRound = true;

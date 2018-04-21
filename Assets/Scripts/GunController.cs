@@ -13,7 +13,7 @@ public class GunController : MonoBehaviour {
     // Use this for initialization
     void Start() {
 
-        reach = 200f;
+        reach = Mathf.Infinity;
         enemyTag = "Player";
 
     }
@@ -21,41 +21,48 @@ public class GunController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetMouseButtonDown(0))
+        if (tc.currentPlayer != null && this.gameObject == tc.currentPlayer.gameObject)
         {
-            Shoot();
+            if (Input.GetMouseButtonDown(0))
+            {
+                Shoot();
+            }
         }
 
     }
 
     private void Shoot (){
 
+        Debug.Log(tc.hasShot);
+
+
         if (!tc.hasShot)
         {
-            Debug.Log("Pew");
+
+            tc.hasShot = true;
+            Debug.Log("111");
+
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, reach))
             {
+                Debug.Log("222");
+
                 if (hit.transform.gameObject.tag == enemyTag)
                 {
+                    Debug.Log("333");
+
                     if (tc.currentPlayer != null)
                     {
-                        if (this.gameObject == tc.currentPlayer.gameObject)
-                        {
-                            // Hit enemy
-                            Debug.Log("Kaboom");
-                            // hit.transform.gameObject.GetComponent<FirstPersonController>();
-                            GameObject enemy = tc.GetOtherPlayer().gameObject;
-                            enemy.GetComponent<HealthManager>().TakeDamage();
 
-                        }
+                        Debug.Log("444");
+
+                        // Hit enemy
+                        Debug.Log("Kaboom");
+                        // hit.transform.gameObject.GetComponent<FirstPersonController>();
+                        GameObject enemy = tc.GetOtherPlayer().gameObject;
+                        enemy.GetComponent<HealthManager>().TakeDamage();
                     }
                 }
             }
-
-            tc.hasShot = true;
         }
-
     }
-
 }
