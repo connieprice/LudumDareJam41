@@ -130,18 +130,18 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &146890297
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 146890296}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.9058075, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1875864360}
+  m_Father: {fileID: 694664135}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &146890298
@@ -351,6 +351,10 @@ MonoBehaviour:
   health: 0
   maxHealth: 0
   gm: {fileID: 1550870854}
+--- !u!4 &694664135 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+  m_PrefabInternal: {fileID: 1716265724}
 --- !u!114 &694664136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,6 +1016,7 @@ MonoBehaviour:
   player2: {fileID: 1095187272}
   timeRemainingText: {fileID: 622629055}
   currentPlayer: {fileID: 0}
+  changePlayer: 1
   hasShot: 0
   running: 0
   rc: {fileID: 1550870855}
@@ -1141,10 +1146,6 @@ MonoBehaviour:
   health: 0
   maxHealth: 0
   gm: {fileID: 1550870854}
---- !u!4 &1875864360 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
-  m_PrefabInternal: {fileID: 1095187271}
 --- !u!114 &1875864361
 MonoBehaviour:
   m_ObjectHideFlags: 0

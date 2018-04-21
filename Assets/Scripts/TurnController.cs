@@ -37,6 +37,8 @@ public class TurnController : MonoBehaviour {
         turnLength = 5f;
         time_remaining = turnLength;
         currentPlayer = player2;
+        startPlayer(player1);
+        startPlayer(player2);
     }
 
     private void Update()
@@ -82,7 +84,7 @@ public class TurnController : MonoBehaviour {
         player.m_RunSpeed = p_DefaultSpeed;
         player.m_JumpSpeed = P_DefaultJumpSpeed;
         player.m_MouseLook.XSensitivity = p_DefaultXSens;
-        player.m_MouseLook.XSensitivity = p_DefaultYSens;
+        player.m_MouseLook.YSensitivity = p_DefaultYSens;
 
     }
 
@@ -92,7 +94,7 @@ public class TurnController : MonoBehaviour {
         player.m_RunSpeed = 0f;
         player.m_JumpSpeed = 0f;
         player.m_MouseLook.XSensitivity = 0f;
-        player.m_MouseLook.XSensitivity = 0f;
+        player.m_MouseLook.YSensitivity = 0f;
 
     }
 
