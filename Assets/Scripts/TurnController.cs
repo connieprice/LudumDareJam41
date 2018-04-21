@@ -16,7 +16,7 @@ public class TurnController : MonoBehaviour {
     private float turnLength;
     public Text timeRemainingText;
     private float time_remaining;
-    private FirstPersonController currentPlayer;
+    public FirstPersonController currentPlayer;
     private bool changePlayer = true;
 
     private void Start()
