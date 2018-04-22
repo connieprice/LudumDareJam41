@@ -23,7 +23,7 @@ public class RoundController : MonoBehaviour {
         player2 = tc.player2.gameObject;
         player1_startpos = player1.transform.position;
         player2_startpos = player2.transform.position;
-        positioning_period_time = 10f;
+        // positioning_period_time = 10f;
         positioning_period_time_remaining = positioning_period_time;
         resetGame();
     }

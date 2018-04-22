@@ -5,19 +5,14 @@ using UnityEngine;
 public class GunController : MonoBehaviour {
 
     private RaycastHit hit;
-    private float reach;
-    private bool rayHit;
     private string enemyTag;
     public TurnController tc;
     public LineRenderer lr;
-    public Transform endRay;
+    public Transform endOfRay;
 
     // Use this for initialization
     void Start() {
-
-        reach = Mathf.Infinity;
         enemyTag = "Player";
-
     }
 
     // Update is called once per frame
@@ -33,47 +28,41 @@ public class GunController : MonoBehaviour {
 
     }
 
-    private void Shoot (){
-        
-        if (!tc.hasShot)
+    private void Shoot ()
+    {
+        if (tc.hasShot == false)
         {
-
             tc.hasShot = true;
 
             lr = tc.currentPlayer.gameObject.GetComponent<LineRenderer>();
-
             lr.SetPosition(0, tc.currentPlayer.transform.position);
 
-            if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, reach))
-            {
-                lr.SetPosition(1, hit.transform.position);
-            } else
-            {
-                lr.SetPosition(1, endRay.position);
-            }
-
-            if (!lr.enabled)
+            if (lr.enabled == false)
             {
                 lr.enabled = true;
             }
 
-
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, reach))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
             {
+                // Do stuff for hitting any obj
 
+                lr.SetPosition(1, hit.transform.position);
 
                 if (hit.transform.gameObject.tag == enemyTag)
                 {
-
                     if (tc.currentPlayer != null)
                     {
-                        // Hit enemy
+                        // Deal damage
                         Debug.Log("Enemy Hit");
-                        // hit.transform.gameObject.GetComponent<FirstPersonController>();
                         GameObject enemy = tc.GetOtherPlayer().gameObject;
                         enemy.GetComponent<HealthManager>().TakeDamage();
                     }
                 }
+            } 
+            else
+            {
+                // Do stuff for missing all objs
+                lr.SetPosition(1, endOfRay.transform.position);
             }
         }
     }
