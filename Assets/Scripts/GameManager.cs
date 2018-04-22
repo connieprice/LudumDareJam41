@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
         AddScore();
         if(p1_score >= 5)
         {
-            
+            // Do win
         }
 
         tc.stopPlayer(tc.currentPlayer);

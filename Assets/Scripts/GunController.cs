@@ -6,6 +6,7 @@ public class GunController : MonoBehaviour {
 
     private RaycastHit hit;
     private string enemyTag;
+    private Vector3 direction;
     public TurnController tc;
     public LineRenderer lr;
     public Transform endOfRay;
@@ -32,6 +33,9 @@ public class GunController : MonoBehaviour {
     {
         if (tc.hasShot == false)
         {
+
+            Debug.Log("Do the shoots");
+
             tc.hasShot = true;
 
             lr = tc.currentPlayer.gameObject.GetComponent<LineRenderer>();
@@ -42,11 +46,16 @@ public class GunController : MonoBehaviour {
                 lr.enabled = true;
             }
 
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
-            {
-                // Do stuff for hitting any obj
+            direction = Vector3.forward;
+            direction.y = direction.y + (endOfRay.transform.position.y - tc.currentPlayer.gameObject.transform.position.y);
+            float tempY = direction.y / Vector3.Magnitude(endOfRay.transform.position - tc.currentPlayer.gameObject.transform.position);
+            direction.y = tempY;
 
-                lr.SetPosition(1, hit.transform.position);
+            if (Physics.Raycast(tc.currentPlayer.gameObject.transform.position, transform.TransformDirection(direction), out hit, Mathf.Infinity))
+            {
+                Debug.DrawRay(tc.currentPlayer.gameObject.transform.position, transform.TransformDirection(direction), Color.green, 100f);
+                // Do stuff for hitting any obj
+                lr.SetPosition(1, hit.point);
 
                 if (hit.transform.gameObject.tag == enemyTag)
                 {

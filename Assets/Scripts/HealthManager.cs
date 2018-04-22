@@ -17,39 +17,29 @@ public class HealthManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
         maxHealth = 3;
         health = maxHealth;
         updateHealth();
-
     }
 
     public void TakeDamage()
     {
-
         health--;
-        Debug.Log(health);
         updateHealth();
-
 
         if (health <= 0)
         {
             Debug.Log("Dead");
             // updateHealth();
             gm.startNextRound();
-
         }
     }
 
     public void updateHealth()
     {
-    
             // enemyHealth = getEnemy();
             healthText.text = health.ToString() + " / 3";
             // enemyHealthText.text = enemyHealth.health.ToString() + " / 3";
-
-
-
     }
 
     public HealthManager getEnemy (){
@@ -62,6 +52,5 @@ public class HealthManager : MonoBehaviour {
         {
             return gm.tc.currentPlayer.gameObject.GetComponent<HealthManager>();
         }
-
     }
 }
