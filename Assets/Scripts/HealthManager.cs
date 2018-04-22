@@ -29,7 +29,6 @@ public class HealthManager : MonoBehaviour {
 
         if (health <= 0)
         {
-            Debug.Log("Dead");
             // updateHealth();
             gm.startNextRound();
         }

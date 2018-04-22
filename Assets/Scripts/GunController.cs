@@ -34,8 +34,6 @@ public class GunController : MonoBehaviour {
         if (tc.hasShot == false)
         {
 
-            Debug.Log("Do the shoots");
-
             tc.hasShot = true;
 
             lr = tc.currentPlayer.gameObject.GetComponent<LineRenderer>();
@@ -62,7 +60,6 @@ public class GunController : MonoBehaviour {
                     if (tc.currentPlayer != null)
                     {
                         // Deal damage
-                        Debug.Log("Enemy Hit");
                         GameObject enemy = tc.GetOtherPlayer().gameObject;
                         enemy.GetComponent<HealthManager>().TakeDamage();
                     }
